@@ -22,7 +22,7 @@ Additionally, for every non-leaf node, I made a histogram in R to show the distr
 
 ### Visualizing the Tree
 
-I went into this project as a JavaScript novice, so I spent a decent amount of time trying to create the sankey-inspired visual I imagined. The goal was to show the "flow" of training examples through the tree. After a split, I wanted the user to see how much of each class went in each direction. Luckily, the underlying tree stucture was taken care of using 
+I went into this project as a JavaScript novice, so I spent a decent amount of time trying to create the sankey-inspired visual I imagined. The goal was to show the "flow" of training examples through the tree. After a split, I wanted the user to see how much of each class went in each direction. Luckily, the underlying tree structure was taken care of using 
 `d3.layout.tree()`. For every node, I created a rectangle for each class with widths that scaled with the proporation of each class. 
 
 The most difficult part of this project was creating paths that would link the nodes. The paths needed travel from the child to the parent, with the same width of the child. Since every parent node has 2 children, that means every parent node has (2 *children*)x(2 *classes per child*) = 4 *incoming paths*. These paths need to avoid overlap if possible and allign so that they fill up the two parent rectangles. I accomplished this through a bit of complicated arithmatic and the `d3.svg.line().interpolate('basis');` function. 

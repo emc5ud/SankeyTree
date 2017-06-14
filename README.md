@@ -16,18 +16,18 @@ The attributes extracted for each banknote are:
 4. **entropy** of image (continuous) 
 5. **class** (integer) 
 
-Using the [ctree package](https://cran.r-project.org/web/packages/partykit/vignettes/ctree.pdf) in R predicts the targer class with an accuracy of 95% with virutally no preprocessing on my end. So my main task is to visualize this tree. I chose to prune this tree to only be 3 layers deep to make my visual less visually cluttered. Then, I extracted the pruned information from my decision tree to a JSON file. 
+Using the [ctree package](https://cran.r-project.org/web/packages/partykit/vignettes/ctree.pdf) in R predicts the target class with an accuracy of 95% with virtually no preprocessing on my end. So my main task is to visualize this tree. I chose to prune this tree to only be 3 layers deep to make my visual less visually cluttered. Then, I extracted the pruned information from my decision tree to a JSON file. 
 
 Additionally, for every non-leaf node, I made a histogram in R to show the distributions of both classes to the left and the right of the split. I thought that this supplementary image could show the reasoning behind why a split occurs. I uploaded this histograms as images online and added the URLs to the JSON file.
 
 ### Visualizing the Tree
 
-I went into this project as a JavaScript novice, so I spent a decent amount of time trying to create the sankey-inspired visual I imagined. The goal was to show the "flow" of training examples through the tree. After a split, I wanted the user to see how much of each class went in each direction. Luckily, the underlying tree structure was taken care of using 
-`d3.layout.tree()`. For every node, I created a rectangle for each class with widths that scaled with the proporation of each class. 
+I went into this project as a JavaScript novice, so I spent a decent amount of time trying to create the Sankey-inspired visual I imagined. The goal was to show the "flow" of training examples through the tree. After a split, I wanted the user to see how much of each class went in each direction. Luckily, the underlying tree structure was taken care of using 
+`d3.layout.tree()`. For every node, I created a rectangle for each class with widths that scaled with the proportion of each class. 
 
-The most difficult part of this project was creating paths that would link the nodes. The paths needed travel from the child to the parent, with the same width of the child. Since every parent node has 2 children, that means every parent node has (2 *children*)x(2 *classes per child*) = 4 *incoming paths*. These paths need to avoid overlap if possible and allign so that they fill up the two parent rectangles. I accomplished this through a bit of complicated arithmatic and the `d3.svg.line().interpolate('basis');` function. 
+The most difficult part of this project was creating paths that would link the nodes. The paths needed travel from the child to the parent, with the same width of the child. Since every parent node has 2 children, that means every parent node has (2 *children*)x(2 *classes per child*) = 4 *incoming paths*. These paths need to avoid overlap if possible and allign so that they fill up the two parent rectangles. I accomplished this through a bit of complicated arithmetic and the `d3.svg.line().interpolate('basis');` function. 
 
-After the tree was constructed, I added code so that the appropriate image would be displayed upon clicking on a brach. As aforementioned, the histogram image was meant to give the user intuition on why that particular split was a good idea by presenting the same information in a different way. Finishing touches involved adding visual cues to show the interactive components of the visualization, and adding tooltips to show the number of examples flowing through the tree.
+After the tree was constructed, I added code so that the appropriate image would be displayed upon clicking on a branch. As aforementioned, the histogram image was meant to give the user intuition on why that particular split was a good idea by presenting the same information in a different way. Finishing touches involved adding visual cues to show the interactive components of the visualization, and adding tooltips to show the number of examples flowing through the tree.
 
 ### Closing Thoughts
 

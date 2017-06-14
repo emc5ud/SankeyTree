@@ -16,17 +16,16 @@ The attributes extracted for each banknote are:
 4. **entropy** of image (continuous) 
 5. **class** (integer) 
 
-Using the [ctree package](https://cran.r-project.org/web/packages/partykit/vignettes/ctree.pdf) in R predicts the targer class with an accuracy of 95% with virutally no preprocessing on my end. So my task is to visualize this tree. I chose to prune this tree to only be 3 layers deep to make my visual less visually cluttered. Then, I extracted the pruned information from my decision tree to a JSON file. 
+Using the [ctree package](https://cran.r-project.org/web/packages/partykit/vignettes/ctree.pdf) in R predicts the targer class with an accuracy of 95% with virutally no preprocessing on my end. So my main task is to visualize this tree. I chose to prune this tree to only be 3 layers deep to make my visual less visually cluttered. Then, I extracted the pruned information from my decision tree to a JSON file. 
 
 Additionally, for every non-leaf node, I made a histogram in R to show the distributions of both classes to the left and the right of the split. I thought that this supplementary image could show the reasoning behind why a split occurs. I uploaded this histograms as images online and added the URLs to the JSON file.
 
 ### Visualizing the Tree
 
-I went into this project as a Javascript novice, so I spent a decent amount of time trying to create the sankey-inspired visual I imagined. I 
+I went into this project as a Javascript novice, so I spent a decent amount of time trying to create the sankey-inspired visual I imagined. Luckily, the underlying tree stucture was taken care of using 
+`d3.layout.tree()`. For every node, I created a rectangle for each class with widths that scaled with the proporation of each class. 
 
-
-
-
+The most difficult part of this project was creating paths that would link the nodes. The paths needed travel from the child to the parent, with the same width of the child. Since every parent node has 2 children, that means every parent node has (2 *children*)x(2 *classes per child*) = 4 *incoming paths*. These paths need to avoid overlap if possible and allign so that they fill up the two parent rectangles. I accomplished this through a bit of complicated arithmatic and the `d3.svg.line().interpolate('basis');` function. 
 
 
 

@@ -8,6 +8,23 @@ The dataset for this project was found on [CI's Machine Learning Respository](ht
 
 > Data were extracted from images that were taken from genuine and forged banknote-like specimens. For digitization, an industrial camera usually used for print inspection was used. The final images have 400x 400 pixels. Due to the object lens and distance to the investigated object gray-scale pictures with a resolution of about 660 dpi were gained. Wavelet Transform tool were used to extract features from images.
 
+The attributes extracted for each banknote are:
+
+1. **variance** of Wavelet Transformed image (continuous) 
+2. **skewness** of Wavelet Transformed image (continuous) 
+3. **curtosis** of Wavelet Transformed image (continuous) 
+4. **entropy** of image (continuous) 
+5. **class** (integer) 
+
+Using the [ctree package](https://cran.r-project.org/web/packages/partykit/vignettes/ctree.pdf) in R predicts the targer class with an accuracy of 95% with virutally no preprocessing on my end. So my task is to visualize this tree. I chose to prune this tree to only be 3 layers deep to make my visual less visually cluttered. Then, I extracted the pruned information from my decision tree to a JSON file. 
+
+Additionally, for every non-leaf node, I made a histogram in R to show the distributions of both classes to the left and the right of the split. I thought that this supplementary image could show the reasoning behind why a split occurs. I uploaded this histograms as images online and added the URLs to the JSON file.
+
+### Visualizing the Tree
+
+I went into this project as a Javascript novice, so I spent a decent amount of time trying to create the sankey-inspired visual I imagined. I 
+
+
 
 
 
